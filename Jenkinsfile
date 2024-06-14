@@ -16,7 +16,7 @@ pipeline{
             steps{
 
                 echo "========executing Testing========"
-                sh 'mvn --version'
+                 sh 'mvn test'
             }
            
         }
@@ -24,7 +24,7 @@ pipeline{
             steps{
 
                 echo "========executing Code Quality========"
-                sh 'mvn --version'
+               
             }
            
         }
@@ -32,7 +32,8 @@ pipeline{
             steps{
 
                 echo "========executing Deploy========"
-                sh 'mvn --version'
+                sh 'mvn package'
+                
             }
            
         }
