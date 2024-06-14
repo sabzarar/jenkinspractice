@@ -36,13 +36,12 @@ pipeline{
                deploy adapters: [tomcat9(credentialsId: 'tomcatuser', path: '', url: '')], contextPath: '/app', onFailure: false, war: '**/*.war'
                 
             }
-           
-        }
-        post{
+            post{
        
-        failure{
-            echo "========pipeline execution failed========"
-            slackSend channel: 'jenkinspipeline', message: 'ProjectA Deployment failed with $BUILD_ID'
+                failure{
+                    echo "========pipeline execution failed========"
+                    slackSend channel: 'jenkinspipeline', message: 'ProjectA Deployment failed with $BUILD_ID'
+                }
             }
         }
     }
