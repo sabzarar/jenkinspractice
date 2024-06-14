@@ -40,7 +40,9 @@ pipeline{
        
                 failure{
                     echo "========pipeline execution failed========"
-                    slackSend channel: 'jenkinspipeline', message: 'build failed with $BUILD_ID'
+                    def msg = "${buildStatus}: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
+
+                    slackSend channel: 'jenkinspipeline', message: msg
                 }
             }
         }
