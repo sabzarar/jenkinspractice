@@ -1,51 +1,51 @@
-pipeline {
-  agent any
-  tools {
-    maven 'maven'
-  }
-
-  stages {
-    stage('build') {
-      steps {
-        sh 
-        mvn 
-        '''pwd
-ls
-date'''
-      }
+pipeline{
+    agent any
+    tools {
+        maven 'maven'
     }
+    stages{
+        stage("Build"){
+            steps{
 
-    stage('Test') {
-      parallel {
-        stage('Test') {
-          steps {
-            echo 'Testing stage'
-            sh 'mvn test'
-
-          }
+                echo "========executing Build========"
+                sh 'mvn --version'
+            }
+           
         }
+         stage("Test"){
+            steps{
 
-        stage('Integration testing') {
-          steps {
-            echo 'Integration testing'
-          }
+                echo "========executing Testing========"
+                sh 'mvn --version'
+            }
+           
         }
+         stage("Sonar"){
+            steps{
 
-      }
-    }
+                echo "========executing Code Quality========"
+                sh 'mvn --version'
+            }
+           
+        }
+         stage("Deploy"){
+            steps{
 
-    stage('Sonar') {
-      steps {
-        echo 'code quality'
-      }
+                echo "========executing Deploy========"
+                sh 'mvn --version'
+            }
+           
+        }
     }
-
-    stage('deploy') {
-      steps {
-        echo 'deployment'
-        sh 'mvn install'
-        deploy adapters: [tomcat9(path: '', url: 'http://127.0.0.1:8088')], contextPath: '/app', onFailure: false, war: '**/*.war'
-      }
+    post{
+        always{
+            echo "========always========"
+        }
+        success{
+            echo "========pipeline executed successfully ========"
+        }
+        failure{
+            echo "========pipeline execution failed========"
+        }
     }
-  }
 }
