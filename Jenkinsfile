@@ -40,7 +40,7 @@ pipeline{
        
                 failure{
                     echo "========pipeline execution failed========"
-                    slackSend channel: 'jenkinspipeline', message: 'ProjectA Deployment failed with $BUILD_ID'
+                    slackSend channel: 'jenkinspipeline', message: 'ProjectA Deployment failed with ' sh ' echo $BUILD_ID'
                 }
             }
         }
