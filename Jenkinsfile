@@ -38,6 +38,13 @@ pipeline{
             }
            
         }
+        post{
+       
+        failure{
+            echo "========pipeline execution failed========"
+            slackSend channel: 'jenkinspipeline', message: 'ProjectA Deployment failed with $BUILD_ID'
+            }
+        }
     }
     post{
         always{
@@ -45,9 +52,11 @@ pipeline{
         }
         success{
             echo "========pipeline executed successfully ========"
+            slackSend channel: 'jenkinspipeline', message: 'ProjectA build Success with $BUILD_ID'
         }
         failure{
             echo "========pipeline execution failed========"
+            slackSend channel: 'jenkinspipeline', message: 'ProjectA build failed with $BUILD_ID'
         }
     }
 }
