@@ -40,9 +40,9 @@ pipeline{
        
                 failure{
                     echo "========pipeline execution failed========"
-                    def msg = "failed ${BUILD_NUMBER}"
+                    
 
-                    slackSend channel: 'jenkinspipeline', message: msg
+                    slackSend channel: 'jenkinspipeline', message: 'failed ${BUILD_NUMBER}'
                 }
             }
         }
