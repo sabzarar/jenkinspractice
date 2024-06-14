@@ -52,7 +52,8 @@ pipeline{
         }
         success{
             echo "========pipeline executed successfully ========"
-            slackSend channel: 'jenkinspipeline', message: 'ProjectA build Success with $BUILD_ID'
+            slackSend channel: 'jenkinspipeline', message: sh ''' \'build failed with $BUILD_ID\'
+'''
         }
         failure{
             echo "========pipeline execution failed========"
